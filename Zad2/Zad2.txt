@@ -1,0 +1,18 @@
+﻿Moja ideja je sljedeća:
+
+U .NETu se lagano može implementirati logger.
+
+Logger bi zapisivao podatke u tablicu ApplicationLog. 
+U toj tablici postojali bi podaci UserId, SessionId, ActionId (Id na akciju koju je log uhvatio).
+
+SessionId označava Id sessiona dodjeljenog prilikom logina. To je bitno pri implementaciji Undo/Redo jer želimo korisnicima omogućiti samo ponavljanje akcija iz istog sessiona.
+
+Action Id bio bi Id svake akcije koju želimo uhvatiti logiranjem. Sve takve akcije bi naslijeđivale ILoggingAction interface.
+Reflectionom se hvata Id akcije.
+Svaka akcija imala bi svoju log tablicu koja bi spremala točne podatke i tip akcije (insert, update, delete) korištene u akciji. 
+Svaka akcija imala bi FK na ApplicationLog.
+Undo/Redo bi samo čitao kroz ApplicationLog i pokretao liste akcija sa spremljenim parametrima i tipovima akcije u tablicama specifičnih akcija.
+
+Ukoliko se radi isključivo o UI Undo/Redo onda mi se stvar čini malo kompliciranijom, jer svaki element na UI-u treba implementirati (preko klase vjerojatno) 
+log event koji opet preko local storage može odraditi akcije. Ponovno se moraju spremiti parametri koji su proslijeđeni u pozivima.
+

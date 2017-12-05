@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Zad3": {
+      "commandName": "Project",
+      "commandLineArgs": "F:\\Dokumenti\\Posao\\6lix test\\Test\\Zad3\\test.xml"
+    }
+  }
+}
