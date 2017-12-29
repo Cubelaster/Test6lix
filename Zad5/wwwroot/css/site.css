@@ -35,3 +35,7 @@ textarea {
         display: none;
     }
 }
+
+.margined {
+    margin: 50px;
+}

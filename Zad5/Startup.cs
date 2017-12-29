@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.AspNetCore.Cors;
 
 namespace Zad5
 {
@@ -28,6 +30,8 @@ namespace Zad5
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddCors();
+
             services.AddMvc();
         }
 
@@ -49,12 +53,14 @@ namespace Zad5
 
             app.UseStaticFiles();
 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+
             app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+                {
+                    routes.MapRoute(
+                        name: "default",
+                        template: "{controller=Home}/{action=Index}/{id?}");
+                });
         }
     }
 }
