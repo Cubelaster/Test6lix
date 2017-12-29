@@ -28,7 +28,6 @@ namespace Zad5
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddCors(options => options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin()));
             services.AddMvc();
         }
 
@@ -37,8 +36,6 @@ namespace Zad5
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             if (env.IsDevelopment())
             {
